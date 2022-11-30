@@ -3,6 +3,7 @@ import Header from "./Header";
 import Dummy from './Dummy';
 import SolutionLetters from './SolutionLetters';
 import ErrorLetters from './ErrorLetters';
+import Form from './Form';
 
 
 // api
@@ -39,17 +40,12 @@ function App() {
     }
   };
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-  };
-
   const getNumberOfErrors = () => {
     const errorLetters = userLetters.filter(
       (letter) => word.includes(letter) === false
     );
     return errorLetters.length;
   };
-
 
   const handleLastLetter = (value) => {
     value = value.toLocaleLowerCase();
@@ -68,23 +64,7 @@ function App() {
         <section>
           <SolutionLetters word={word} userLetters={userLetters}></SolutionLetters>
           <ErrorLetters word={word} userLetters={userLetters}></ErrorLetters>
-          <form className='form' onSubmit={handleSubmit}>
-            <label className='title' htmlFor='last-letter'>
-              Escribe una letra:
-            </label>
-            <input
-              autoFocus
-              autoComplete='off'
-              className='form__input'
-              maxLength='1'
-              type='text'
-              name='last-letter'
-              id='last-letter'
-              value={lastLetter}
-              onKeyDown={handleKeyDown}
-              onChange={handleChange}
-            />
-          </form>
+          <Form value={lastLetter} onKeyDown={handleKeyDown} onChange={handleChange}></Form>
         </section>
         <Dummy numberOfErrors={getNumberOfErrors()}/>
       </main>
