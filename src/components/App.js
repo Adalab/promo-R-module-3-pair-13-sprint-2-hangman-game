@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
-// import { Link, Route, Routes } from "react-router-dom";
+// components
 import Header from "./Header";
 import Dummy from "./Dummy";
 import SolutionLetters from "./SolutionLetters";
 import ErrorLetters from "./ErrorLetters";
 import Form from "./Form";
 import Footer from "./Footer";
+import Instructions from "./Instructions";
+import Options from "./Options";
+//states
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 // api
 import getWordFromApi from "../services/api";
@@ -63,24 +67,34 @@ function App() {
       <Header />
       <main className="main">
         <section>
-          <SolutionLetters
-            word={word}
-            userLetters={userLetters}
-          ></SolutionLetters>
-          <ErrorLetters word={word} userLetters={userLetters}></ErrorLetters>
-          <Form
-            value={lastLetter}
-            onKeyDown={handleKeyDown}
-            onChange={handleChange}
-          ></Form>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SolutionLetters
+                    word={word}
+                    userLetters={userLetters}
+                  ></SolutionLetters>
+                  <ErrorLetters
+                    word={word}
+                    userLetters={userLetters}
+                  ></ErrorLetters>
+                  <Form
+                    value={lastLetter}
+                    onKeyDown={handleKeyDown}
+                    onChange={handleChange}
+                  ></Form>
+                </>
+              }
+            />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="/options" element={<Options />} />
+          </Routes>
         </section>
         <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
-      {/* <Routes>
-        <Route path="/ajugar" element={<Footer />}/>
-      </Routes> */}
       <Footer />
-      
     </div>
   );
 }

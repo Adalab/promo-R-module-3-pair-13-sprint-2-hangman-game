@@ -1,28 +1,29 @@
-import "../styles/Footer.scss";
+import { NavLink } from 'react-router-dom';
+import '../styles/Footer.scss';
 
-const Footer = (props) => {
+const Footer = () => {
   return (
-    <footer class="footer">
+    <footer className="footer">
       <nav>
         <ul>
-          <li class="footer__menu-item">
-            <a class="footer__menu-link" href="#/">
+          <li className="footer__menu-item">
+            <NavLink className="footer__menu-link" to="/">
               A jugar
-            </a>
+            </NavLink>
           </li>
-          <li class="footer__menu-item">
-            <a class="footer__menu-link active" href="#/instructions">
+          <li className="footer__menu-item">
+            <NavLink className="footer__menu-link" to="/instructions">
               ¿Cómo se juega?
-            </a>
+            </NavLink>
           </li>
-          <li class="footer__menu-item">
-            <a class="footer__menu-link" href="#/options">
+          <li className="footer__menu-item">
+            <NavLink className="footer__menu-link" to="/options">
               Más opciones
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
-      <small class="footer__copy">© Adalab</small>
+      <small className="footer__copy">&copy; Adalab</small>
     </footer>
   );
 };
