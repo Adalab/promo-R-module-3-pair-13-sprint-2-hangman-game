@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+// import { Link, Route, Routes } from "react-router-dom";
 import Header from "./Header";
-import Dummy from './Dummy';
-import SolutionLetters from './SolutionLetters';
-import ErrorLetters from './ErrorLetters';
-import Form from './Form';
-
+import Dummy from "./Dummy";
+import SolutionLetters from "./SolutionLetters";
+import ErrorLetters from "./ErrorLetters";
+import Form from "./Form";
+import Footer from "./Footer";
 
 // api
-import getWordFromApi from '../services/api';
+import getWordFromApi from "../services/api";
 // styles
-import '../styles/App.scss';
-import '../styles/Dummy.scss';
-import '../styles/Letters.scss';
-import '../styles/Form.scss';
-import '../styles/Header.scss';
+import "../styles/App.scss";
+import "../styles/Dummy.scss";
+import "../styles/Letters.scss";
+import "../styles/Form.scss";
+import "../styles/Header.scss";
 
 function App() {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
-  const [lastLetter, setLastLetter] = useState('');
+  const [lastLetter, setLastLetter] = useState("");
 
   useEffect(() => {
     getWordFromApi().then((word) => {
@@ -34,8 +35,8 @@ function App() {
   };
 
   const handleChange = (ev) => {
-    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //add regular pattern 
-    if (re.test(ev.target.value) || ev.target.value === '') {
+    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //add regular pattern
+    if (re.test(ev.target.value) || ev.target.value === "") {
       handleLastLetter(ev.target.value);
     }
   };
@@ -58,16 +59,28 @@ function App() {
   };
 
   return (
-    <div className='page'>
-      <Header/>
-      <main className='main'>
+    <div className="page">
+      <Header />
+      <main className="main">
         <section>
-          <SolutionLetters word={word} userLetters={userLetters}></SolutionLetters>
+          <SolutionLetters
+            word={word}
+            userLetters={userLetters}
+          ></SolutionLetters>
           <ErrorLetters word={word} userLetters={userLetters}></ErrorLetters>
-          <Form value={lastLetter} onKeyDown={handleKeyDown} onChange={handleChange}></Form>
+          <Form
+            value={lastLetter}
+            onKeyDown={handleKeyDown}
+            onChange={handleChange}
+          ></Form>
         </section>
-        <Dummy numberOfErrors={getNumberOfErrors()}/>
+        <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
+      {/* <Routes>
+        <Route path="/ajugar" element={<Footer />}/>
+      </Routes> */}
+      <Footer />
+      
     </div>
   );
 }
