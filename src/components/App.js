@@ -7,6 +7,7 @@ import Form from "./Form";
 import Footer from "./Footer";
 import Instructions from "./Instructions";
 import Options from "./Options";
+import Loading from "./Loading";
 //states
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
   const [lastLetter, setLastLetter] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getWordFromApi().then((word) => {
@@ -64,7 +66,8 @@ function App() {
 
   return (
     <div className="page">
-      <Header />
+      <Header/>
+      <Loading loading={loading}/>
       <main className="main">
         <section>
           <Routes>
@@ -88,13 +91,13 @@ function App() {
                 </>
               }
             />
-            <Route path="/instructions" element={<Instructions />} />
-            <Route path="/options" element={<Options />} />
+            <Route path="/instructions" element={<Instructions/>}/>
+            <Route path="/options" element={<Options/>}/>
           </Routes>
         </section>
-        <Dummy numberOfErrors={getNumberOfErrors()} />
+        <Dummy numberOfErrors={getNumberOfErrors()}/>
       </main>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
