@@ -1,7 +1,8 @@
 import "../styles/Loading.scss";
 
-const Loading = (props) => {
-    return props.loading ?<span className="loading"/>:null;
-};
-  
-  export default Loading;
+function Loading (props) {
+    return(
+        <span className={props.isLoading ? props.loading : '' } />
+    )
+}
+export default Loading;

@@ -25,10 +25,12 @@ function App() {
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
   const [lastLetter, setLastLetter] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getWordFromApi().then((word) => {
+      setIsLoading(false);
       setWord(word);
     });
   }, []);
@@ -67,7 +69,7 @@ function App() {
   return (
     <div className="page">
       <Header/>
-      <Loading loading={loading}/>
+      <Loading loading='loading' isLoading={isLoading} />
       <main className="main">
         <section>
           <Routes>
